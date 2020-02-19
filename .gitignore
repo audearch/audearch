@@ -103,6 +103,10 @@ venv.bak/
 # mypy
 .mypy_cache/
 
+# vscode config
+.vscode/
+.idea/
+
 # Created by https://www.gitignore.io/api/virtualenv
 
 ### VirtualEnv ###
