@@ -1,12 +1,17 @@
 import wave
+import numpy as np
+from scipy import signal
 
-def open_wavfile(wave_resource):
+main_wave, main_wave_rate = open_wavfile()
+array = transform_nparray(main_wave)
+
+def open_wavfile(wave_path):
     """
     get wavefile
 
     Parameters
     ----------
-    wave_resource : string
+    wave_path : string
         wavefile path
     
     Returns
@@ -15,6 +20,26 @@ def open_wavfile(wave_resource):
         wavefile(file-like object)
     """
 
-    wave_file = wave.open(wave_resource)
+    wave_file = wave.open(wave_path, rb)
+    rate = wave_file.getframerate()
 
-    return wave_file
+    return wave_file,rate
+
+def transform_nparray(orignal_wave):
+    """transform wave into ndarray 
+    
+    Parameters
+    ----------
+    orignal_wave : file
+        wave_read object
+    
+    Returns
+    -------
+    narray : ndarray
+        1-d array 
+    """
+
+    narray = orignal_wave.readframes(orignal_wave.getnframes())
+    narray = np.frombuffer(narray, dtype="int16")
+
+    return narray
