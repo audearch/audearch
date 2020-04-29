@@ -3,4 +3,7 @@ python:
 - 3.6
 - 3.7
 - 3.8.1
-script: python -m unittest
+install: pip install codecov coverage
+script: coverage run -m unittest
+after_success:
+    - codecov
