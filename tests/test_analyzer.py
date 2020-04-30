@@ -8,7 +8,7 @@ import numpy as np
 class TestAnalyzer(unittest.TestCase):
 
     def test_open_wavefile(self):
-        filepath = os.getcwd() + '/test.wav'
+        filepath = os.getcwd() + '/tests/test.wav'
         file, rate = analyzer.open_wavfile(filepath)
 
         exwavrate = 8000
@@ -16,7 +16,7 @@ class TestAnalyzer(unittest.TestCase):
         self.assertEquals(exwavrate, rate)
 
     def test_transform_nparray(self):
-        wavfile, rate = analyzer.open_wavfile("test.wav")
+        wavfile, rate = analyzer.open_wavfile("tests/test.wav")
         narray, narray_frame = analyzer.transform_nparray(wavfile)
         a = 1  # 振幅
         fs = 8000  # サンプリング周波数
