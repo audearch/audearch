@@ -1,6 +1,5 @@
 numpy==1.18.0
 scipy==1.4.1
-functions==0.7.0
 autopep8==1.5.1
 entrypoints==0.3
 flake8==3.7.9
