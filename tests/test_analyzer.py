@@ -13,7 +13,7 @@ class TestAnalyzer(unittest.TestCase):
 
         exwavrate = 8000
 
-        self.assertEquals(exwavrate, rate)
+        self.assertEqual(exwavrate, rate)
 
     def test_transform_nparray(self):
         wavfile, rate = analyzer.open_wavfile("tests/test.wav")
