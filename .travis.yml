@@ -5,7 +5,7 @@ python:
 - 3.8.1
 install: pip install codecov coverage
 script: 
-    - coverage run -m unittest
+    - coverage run -m unittest test_analyzer
     - codecov --token=$CODECOV_TOKEN
 after_success:
     - codecov
