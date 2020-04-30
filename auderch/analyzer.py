@@ -1,6 +1,5 @@
 import wave
 import numpy as np
-import functions as fn
 from scipy import ndimage as ndi
 
 
@@ -69,7 +68,7 @@ def stft(onedarray, array_rate, array_frames):
     """
 
     # monauralize 1-darray
-    x = fn.monauralize(onedarray)
+    x = onedarray
 
     # define song parameter
     nfft = 1024
@@ -116,6 +115,8 @@ def find_peak(twoarray, size):
     return peak_freq, peak_time
 
 
+"""
 main_wave, main_wave_rate = open_wavfile()
 array, frames = transform_nparray(main_wave)
 spec = stft(array, main_wave_rate, frames)
+"""
