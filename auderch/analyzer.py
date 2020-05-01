@@ -49,7 +49,7 @@ def transform_nparray(orignal_wave):
 # TODO:write more description
 
 
-def STFT(s, nframes, noverlap):
+def STFT(s, nframes):
     """
     short time fourier transform
 
