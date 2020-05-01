@@ -49,62 +49,37 @@ def transform_nparray(orignal_wave):
 # TODO:write more description
 
 
-def stft(onedarray, array_rate, array_frames):
-    """short-time fourier transform
+def STFT(s, nframes, noverlap):
+    """
+    short time fourier transform
 
     Parameters
     ----------
-    onedarray : 1-d nparray
-        [description]
-    array_rate : string
-        [description]
-    array_frames : string
-        [description]
+    s : 1D nparray
+        audio signal
+    nframes : int
+        the number of frames
 
     Returns
     -------
-    2-d nparray
-        [description]
+    np.complex128
+        numpy complex number(both real-part and imaginaly-part is float64)
     """
+    overlap = nframes//2
+    nlines = s.shape[0]
+    win = np.hanning(nframes)
+    Mf = nframes//2 + 1
+    Nf = int(np.ceil((nlines-overlap)/(nframes-overlap)))-1
 
-    # monauralize 1-darray
-    x = onedarray
+    S = np.empty([Mf, Nf], dtype=np.complex128)
 
-    # define song parameter
-    nfft = 1024
-    overlap = nfft / 2
-    sampling_rate = array_rate
-    frame_length = array_frames
-    time_song = float(frame_length) / sampling_rate
-    time_unit = 1 / float(sampling_rate)
+    for n in range(Nf):
+        S[:, n] = np.fft.rfft(
+            s[(nframes-overlap)*n:(nframes-overlap)*n+nframes] * win,
+            n=nframes,
+            axis=0)
 
-    # define fft-frame parameter
-    start = (nfft / 2) * time_unit
-    stop = time_song
-    step = (nfft - overlap) * time_unit
-    time_ruler = np.arrange(start, stop, step)
-
-    # define window function
-    window = np.hamming(nfft)
-
-    spec = np.zeros([len(time_ruler), 1 + overlap])
-    pos = 0
-
-    for fft_index in range(len(time_ruler)):
-        frame = x[pos:pos+nfft]
-
-        if len(frame) == nfft:
-            # multiply window function
-            windowded = window * frame
-            # get fft result
-            fft_result = np.fft.rfft(windowded)
-
-            for i in range(len(spec[fft_index])):
-                spec[fft_index][-i-1] = fft_result[i]
-
-            pos += (nfft - overlap)
-
-    return spec
+    return S
 
 
 def find_peak(twoarray, size):
