@@ -59,7 +59,7 @@ def find_peak(s, fs, size):
     return peak_freq, peak_time
 
 
-def peak_to_landmark(peaks_freq, peaks_time, target_time=10, target_dist=10):
+def peak_to_landmark(peaks_freq, peaks_time, target_freq=10, target_time=10, target_dist=10):
     F1_BITS = 8
     DF_BITS = 6
     DT_BITS = 6
