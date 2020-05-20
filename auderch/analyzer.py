@@ -59,8 +59,37 @@ def find_peak(s, fs, size):
     return peak_freq, peak_time
 
 
-"""
-main_wave, main_wave_rate = open_wavfile()
+def peak_to_landmark(peaks_freq, peaks_time, target_time=10, target_dist=10):
+    F1_BITS = 8
+    DF_BITS = 6
+    DT_BITS = 6
+
+    B1_MASK = (1 << F1_BITS) - 1
+    B1_SHIFT = DF_BITS + DT_BITS
+    DF_MASK = (1 << DF_BITS) - 1
+    DF_SHIFT = DT_BITS
+    DT_MASK = (1 << DT_BITS) - 1
+
+    landmarks = []
+
+    for anc_freq, anc_time in zip(peaks_freq, peaks_time):
+        firsttime = anc_time + target_time
+        endtime = firsttime + target_dist
+        target = dict(zip(peaks_time, peaks_freq))
+        zone = {k: v for k, v in target.items() if int(k) >
+                firsttime and int(k) < endtime}
+        for ptime_target, pfreq_target in list(zone.items()):
+            disttime = int(ptime_target) - anc_time
+
+            hsh = (((anc_freq & B1_MASK) << B1_SHIFT) | (
+                ((pfreq_target+target_freq-anc_freq) & DF_MASK) << DF_SHIFT) | (disttime & DT_MASK))
+            landmarks.append((hsh, anc_time))
+
+    return landmarks
+
+
+main_wave, main_wave_rate = open_wavfile(
+    "C://Users/conta/Desktop/dev/auderch/tests/test.wav")
 array, frames = transform_nparray(main_wave)
 pf, pt = find_peak(array, frames, 5)
-"""
+print(peak_to_landmark(pf, pt))
