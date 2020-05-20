@@ -1,6 +1,7 @@
 import wave
 import numpy as np
 from scipy import ndimage as ndi
+from scipy import signal
 
 
 def open_wavfile(wave_path):
@@ -49,43 +50,11 @@ def transform_nparray(orignal_wave):
 # TODO:write more description
 
 
-def STFT(s, nframes):
-    """
-    short time fourier transform
-
-    Parameters
-    ----------
-    s : 1D nparray
-        audio signal
-    nframes : int
-        the number of frames
-
-    Returns
-    -------
-    np.complex128
-        numpy complex number(both real-part and imaginaly-part is float64)
-    """
-    overlap = nframes//2
-    nlines = s.shape[0]
-    win = np.hanning(nframes)
-    Mf = nframes//2 + 1
-    Nf = int(np.ceil((nlines-overlap)/(nframes-overlap)))-1
-
-    S = np.empty([Mf, Nf], dtype=np.complex128)
-
-    for n in range(Nf):
-        S[:, n] = np.fft.rfft(
-            s[(nframes-overlap)*n:(nframes-overlap)*n+nframes] * win,
-            n=nframes,
-            axis=0)
-
-    return S
-
-
-def find_peak(twoarray, size):
-    sgram = np.abs(twoarray)
-    sgram_max = ndi.maximum_filter(sgram, size=size, mode="constant")
-    maxima = (sgram == sgram_max) & (sgram > 0.2)
+def find_peak(s, fs, size):
+    f1, t1, Zxx1 = signal.stft(s, fs=fs)
+    sgram = np.abs(Zxx1)
+    sgrammax = ndi.maximum_filter(sgram, size=size, mode="constant")
+    maxima = (sgram == sgrammax) & (sgram > 0.2)
     peak_freq, peak_time = np.where(maxima)
     return peak_freq, peak_time
 
@@ -93,5 +62,5 @@ def find_peak(twoarray, size):
 """
 main_wave, main_wave_rate = open_wavfile()
 array, frames = transform_nparray(main_wave)
-spec = stft(array, main_wave_rate, frames)
+pf, pt = find_peak(array, frames, 5)
 """
