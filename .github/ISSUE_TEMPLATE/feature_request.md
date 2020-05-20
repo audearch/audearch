@@ -7,14 +7,14 @@ assignees: peijun
 
 ---
 
-**Is your feature request related to a problem? Please describe.**
-A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
+**Details**
+Please write your issue details
 
-**Describe the solution you'd like**
-A clear and concise description of what you want to happen.
+**TODO**
+-[ ] Plase write todo as checkbox
 
-**Describe alternatives you've considered**
-A clear and concise description of any alternative solutions or features you've considered.
+**Use**
+Please write Required Modules
 
 **Additional context**
 Add any other context or screenshots about the feature request here.
