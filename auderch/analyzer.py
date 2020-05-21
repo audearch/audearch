@@ -88,8 +88,9 @@ def peak_to_landmark(peaks_freq, peaks_time, target_freq=10, target_time=10, tar
     return landmarks
 
 
-main_wave, main_wave_rate = open_wavfile(
-    "C://Users/conta/Desktop/dev/auderch/tests/test.wav")
+"""
+main_wave, main_wave_rate = open_wavfile()
 array, frames = transform_nparray(main_wave)
 pf, pt = find_peak(array, frames, 5)
-print(peak_to_landmark(pf, pt))
+list_landmark = peak_to_landmark(pf,pt)
+"""
