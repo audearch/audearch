@@ -34,6 +34,16 @@ class TestAnalyzer(unittest.TestCase):
 
         assert_array_equal(swav, narray)
 
+    def test_peak_to_landmark(self):
+        wavfile, rate = analyzer.open_wavfile("tests/test.wav")
+        narray, narray_frame = analyzer.transform_nparray(wavfile)
+        pf, pt = analyzer.find_peak(narray, narray_frame, 5)
+        list_landmark = analyzer.peak_to_landmark(pf, pt)
+
+        test1 = (57995, 1)
+
+        assert_array_equal(test1, list_landmark[0])
+
 
 if __name__ == "__main__":
     unittest.main()
