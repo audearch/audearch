@@ -1,30 +1,29 @@
-import mysql.connector
-from mysql.connector import errorcode
 import configparser
+from pymongo import MongoClient
 
 
-class Databese:
-    __user = None
-    __password = None
-    __dbname = None
-    __connection = None
-    __cursor = None
+class Database(object):
+    __client = None
+    __db = None
+    __collection = None
 
-    def __init__(self):
+    def __init__(self, collectionName):
         config = configparser.ConfigParser()
         config.read('config.ini')
 
-        self.__user = config['DATABASE']['user']
-        self.__password = config['DATABASE']['password']
-        self.__dbname = config['DATABASE']['dbname']
+        self.__dbname = config['DATABASE']['db']
+        self.__client = MongoClient()
+        self.__db = self.__client[self.__dbname]
+        self.__collection = self.__db.get_collection(collectionName)
 
-    def open(self):
-        cnx = mysql.connector.connect(
-            user=self.__user, passwd=self.__password, db=self.__dbname)
+    def insert(self, id, hsh, starttime):
+        post = {
+            'music_id': id,
+            'music_hash': hsh,
+            'music_starttime': starttime
+        }
 
-        self.__connection = cnx
-        self.__cursor = cnx.cursor()
+        return self.__collection.insert_one(post)
 
-    def close(self):
-        self.__cursor.close()
-        self.__connection.close()
+    def find(self, projection=None, filter=None, sort=None):
+        return self.__collection.find(projection=projection, filter=filter, sort=sort)
