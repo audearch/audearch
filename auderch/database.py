@@ -1,20 +1,41 @@
 import configparser
 from pymongo import MongoClient
+from abc import ABCMeta, abstractclassmethod
 
 
-class Database(object):
-    __client = None
-    __db = None
+class Factory(metaclass=ABCMeta):
+
+    @abstractclassmethod
+    def __connect_database(self):
+        pass
+
+    @abstractclassmethod
+    def __create_database(self):
+        pass
+
+    def create(self):
+        self.__db = self.__connect_database()
+
+        d = self.__create_database(self.__db)
+        return d
+
+
+class Database(metaclass=ABCMeta):
+
+    @abstractclassmethod
+    def insert(self):
+        pass
+
+    @abstractclassmethod
+    def find(self):
+        pass
+
+
+class Mongodb(Database):
     __collection = None
 
-    def __init__(self, collectionName):
-        config = configparser.ConfigParser()
-        config.read('config.ini')
-
-        self.__dbname = config['DATABASE']['db']
-        self.__client = MongoClient()
-        self.__db = self.__client[self.__dbname]
-        self.__collection = self.__db.get_collection(collectionName)
+    def ___init__(self, db):
+        self.__collection = db
 
     def insert(self, id, hsh, starttime):
         post = {
@@ -27,3 +48,17 @@ class Database(object):
 
     def find(self, projection=None, filter=None, sort=None):
         return self.__collection.find(projection=projection, filter=filter, sort=sort)
+
+
+class MongodbFactory(Factory):
+
+    def __connect_database(self):
+        config = configparser.ConfigParser()
+        config.read('config.ini')
+
+        self.__client = MongoClient()
+        self.__db = self.__client[config['MongoDB']['dbname']]
+        self.__collection = self.__db.get_collection(config['MongoDB']['collectionname'])
+
+    def __create_database(self, db):
+        return Mongodb(db)
