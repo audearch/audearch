@@ -50,7 +50,7 @@ class Mongodb(Database):
         return self.__collection.find(projection=projection, filter=filter, sort=sort)
 
 
-class MongodbFactory(Factory):
+class MongodbFactory(DatabaseFactory):
 
     def __connect_database(self):
         config = configparser.ConfigParser()
