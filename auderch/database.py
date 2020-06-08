@@ -3,7 +3,7 @@ from pymongo import MongoClient
 from abc import ABCMeta, abstractclassmethod
 
 
-class Factory(metaclass=ABCMeta):
+class DatabaseFactory(metaclass=ABCMeta):
 
     @abstractclassmethod
     def __connect_database(self):
