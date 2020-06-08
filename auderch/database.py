@@ -1,15 +1,15 @@
 import configparser
 from pymongo import MongoClient
-from abc import ABCMeta, abstractclassmethod
+from abc import ABCMeta, abstractmethod
 
 
 class DatabaseFactory(metaclass=ABCMeta):
 
-    @abstractclassmethod
+    @abstractmethod
     def __connect_database(self):
         pass
 
-    @abstractclassmethod
+    @abstractmethod
     def __create_database(self):
         pass
 
@@ -22,11 +22,11 @@ class DatabaseFactory(metaclass=ABCMeta):
 
 class Database(metaclass=ABCMeta):
 
-    @abstractclassmethod
+    @abstractmethod
     def insert(self):
         pass
 
-    @abstractclassmethod
+    @abstractmethod
     def find(self):
         pass
 
