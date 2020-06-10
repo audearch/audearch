@@ -126,4 +126,5 @@ pip-selfcheck.json
 
 # End of https://www.gitignore.io/api/virtualenv
 
-*.ini
+tox.ini
+auderch/config.ini
