@@ -2,7 +2,6 @@ import unittest
 import auderch.database as ad
 import auderch.analyzer as aa
 import pymongo
-from bson.json_util import dumps, loads
 
 
 class TestDatabase(unittest.TestCase):
