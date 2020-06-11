@@ -15,7 +15,7 @@ class TestDatabase(unittest.TestCase):
         mongodb = ad.MongodbFactory()
         imongodb = mongodb.create()
 
-        main_wave, main_wave_rate = aa.open_wavfile("C://Users/conta/desktop/dev/auderch/tests/test.wav")
+        main_wave, main_wave_rate = aa.open_wavfile("tests/test.wav")
         array, frames = aa.transform_nparray(main_wave)
         pf, pt = aa.find_peak(array, frames, 5)
         list_landmark = aa.peak_to_landmark(pf, pt)
