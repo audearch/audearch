@@ -9,7 +9,7 @@ import time
 app = FastAPI(
     title='auderch',
     description='auderch is a audio fingerprinting system',
-    version='0.0'
+    version='0.1.0'
 )
 
 templates = Jinja2Templates(directory="web/templates")
