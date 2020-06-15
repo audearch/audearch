@@ -14,6 +14,7 @@ It's a system that recognizes and searches for music, using a technology called 
 
 - python 3.6+
 - pip 20.1.1+
+- MongoDB
 
 ## Installation
 
