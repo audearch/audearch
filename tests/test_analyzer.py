@@ -55,7 +55,7 @@ class TestAnalyzer(object):
 
         assert_array_equal(test1, list_landmark[0])
 
-    def test_analyze_(self):
+    def test_analyzer(self):
         list_landmark = analyzer.analyzer("tests/test.wav")
 
         test1 = (57995, 1)
