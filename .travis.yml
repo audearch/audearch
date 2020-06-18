@@ -8,7 +8,6 @@ service:
     - mongodb
 script: 
     - python setup.py install
-    - coverage run -m unittest discover
-    - codecov --token=$CODECOV_TOKEN
+    - pytest
 after_success:
     - codecov
