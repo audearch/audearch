@@ -1,11 +1,11 @@
-import unittest
+import pytest
 import os
 import auderch.analyzer as analyzer
 from numpy.testing import assert_array_equal
 import numpy as np
 
 
-class TestAnalyzer(unittest.TestCase):
+class TestAnalyzer(object):
 
     def test_open_wavefile(self):
         filepath = os.getcwd() + '/tests/test.wav'
@@ -13,7 +13,7 @@ class TestAnalyzer(unittest.TestCase):
 
         exwavrate = 8000
 
-        self.assertEqual(exwavrate, rate)
+        assert exwavrate == rate
 
     def test_transform_nparray(self):
         wavfile, rate = analyzer.open_wavfile("tests/test.wav")
@@ -57,4 +57,4 @@ class TestAnalyzer(unittest.TestCase):
 
 
 if __name__ == "__main__":
-    unittest.main()
+    pytest.main()

@@ -1,10 +1,10 @@
-import unittest
+import pytest
 import auderch.database as ad
 import auderch.analyzer as aa
 import pymongo
 
 
-class TestDatabase(unittest.TestCase):
+class TestDatabase(object):
     def setUp(self):
         self.client = pymongo.MongoClient('localhost', 27017)
         self.db = self.client.test_auderch
@@ -26,8 +26,8 @@ class TestDatabase(unittest.TestCase):
 
         result = dict(cur[0])
 
-        self.assertEqual(result['music_hash'], int(57997))
+        assert result['music_hash'] == int(57997)
 
 
 if __name__ == '__main__':
-    unittest.main()
+    pytest.main()
