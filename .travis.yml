@@ -3,12 +3,11 @@ python:
 - 3.6
 - 3.7
 - 3.8.1
-install: pip install codecov coverage
+install: pip install codecov pytest-cov
 service:
     - mongodb
 script: 
     - python setup.py install
-    - coverage run -m unittest discover
-    - codecov --token=$CODECOV_TOKEN
+    - pytest -v --cov=auderch --cov=web
 after_success:
     - codecov
