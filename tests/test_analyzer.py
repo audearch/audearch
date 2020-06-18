@@ -55,6 +55,13 @@ class TestAnalyzer(object):
 
         assert_array_equal(test1, list_landmark[0])
 
+    def test_analyze_(self):
+        list_landmark = analyzer.analyzer("tests/test.wav")
+
+        test1 = (57995, 1)
+
+        assert_array_equal(test1, list_landmark[0])
+
 
 if __name__ == "__main__":
     pytest.main()
