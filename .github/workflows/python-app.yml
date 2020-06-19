@@ -30,7 +30,7 @@ jobs:
         pip install codecov pytest-cov
     - name: Test with pytest
       run: |
-        pytest -v --cov=auderch --cov=web --cov-report=xml
+        pytest -v --cov=audearch --cov-report=xml
     - name: Codecov
       uses: codecov/codecov-action@v1.0.7
       with:

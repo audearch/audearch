@@ -11,7 +11,7 @@ pytest = "*"
 [packages]
 
 [scripts]
-test = "pytest -v --cov=auderch --cov=web"
+test = "pytest -v --cov=audearch --cov-report=xml"
 
 [requires]
 python_version = "3.8"
