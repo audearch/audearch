@@ -2,4 +2,3 @@ numpy==1.18.5
 scipy==1.4.1
 pymongo==3.10.1
 configparser==5.0.0
-pytest==5.4.3

@@ -1,0 +1,17 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+autopep8 = "*"
+flake8 = "*"
+pytest = "*"
+
+[packages]
+
+[scripts]
+test = "pytest -v --cov=auderch --cov=web"
+
+[requires]
+python_version = "3.8"
