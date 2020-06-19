@@ -1,4 +1,4 @@
-import auderch.analyzer as aa
+import audearch.analyzer as aa
 from pathlib import Path
 
 
