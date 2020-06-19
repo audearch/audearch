@@ -1,6 +1,6 @@
 import pytest
-import auderch.database as ad
-import auderch.analyzer as aa
+import audearch.database as ad
+import audearch.analyzer as aa
 
 
 class TestDatabase(object):

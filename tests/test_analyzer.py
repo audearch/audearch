@@ -1,6 +1,6 @@
 import pytest
 import os
-import auderch.analyzer as analyzer
+import audearch.analyzer as analyzer
 from numpy.testing import assert_array_equal
 import numpy as np
 
