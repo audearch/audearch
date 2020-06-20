@@ -14,7 +14,4 @@ def search(path, imongodb):
 
     ans = statistics.mode(ids)
 
-    print("RESULT")
-    print("-----------------------")
-    print("id:" + str(ans))
-    print("-----------------------")
+    return ans
