@@ -2,6 +2,7 @@ import wave
 import numpy as np
 from scipy import ndimage as ndi
 from scipy import signal
+import hashlib
 
 
 def open_wavfile(wave_path):
@@ -60,15 +61,6 @@ def find_peak(s, fs, size):
 
 
 def peak_to_landmark(peaks_freq, peaks_time, target_freq=10, target_time=10, target_dist=10):
-    F1_BITS = 8
-    DF_BITS = 6
-    DT_BITS = 6
-
-    B1_MASK = (1 << F1_BITS) - 1
-    B1_SHIFT = DF_BITS + DT_BITS
-    DF_MASK = (1 << DF_BITS) - 1
-    DF_SHIFT = DT_BITS
-    DT_MASK = (1 << DT_BITS) - 1
 
     landmarks = []
 
@@ -81,8 +73,8 @@ def peak_to_landmark(peaks_freq, peaks_time, target_freq=10, target_time=10, tar
         for ptime_target, pfreq_target in list(zone.items()):
             disttime = int(ptime_target) - anc_time
 
-            hsh = (((anc_freq & B1_MASK) << B1_SHIFT) | (
-                ((pfreq_target+target_freq-anc_freq) & DF_MASK) << DF_SHIFT) | (disttime & DT_MASK))
+            hsh = hashlib.sha256((anc_freq) | (pfreq_target+target_freq-anc_freq) | (disttime))
+
             landmarks.append((hsh, anc_time))
 
     return landmarks
