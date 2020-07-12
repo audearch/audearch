@@ -13,7 +13,7 @@ class TestRegister(object):
 
         result = dict(cur[0])
 
-        assert result['music_hash'] == "a4bd89d0c3e16ec03c5436d0b9b8eb1a934beeac808447459e5ee2f9a23e97d7"
+        assert result['music_hash'] == "6ee2e0a7cfbd562f1436ca43a73ba2afea0367244eaa3fa5cc71b826d42ea702"
 
 
 if __name__ == '__main__':
