@@ -73,7 +73,7 @@ def peak_to_landmark(peaks_freq, peaks_time, target_freq=10, target_time=10, tar
         for ptime_target, pfreq_target in list(zone.items()):
             disttime = int(ptime_target) - anc_time
 
-            hsh = hashlib.sha256((anc_freq) | (pfreq_target+target_freq-anc_freq) | (disttime))
+            hsh = hashlib.sha256((anc_freq) | (pfreq_target+target_freq-anc_freq) | (disttime)).hexdigest()
 
             landmarks.append((hsh, anc_time))
 

@@ -8,7 +8,7 @@ def register_one(id, path, imongodb):
     list_landmark = aa.analyzer(path)
 
     for landmark in list_landmark:
-        imongodb.insert(id, int(landmark[0]), int(landmark[1]))
+        imongodb.insert(id, landmark[0], int(landmark[1]))
 
 
 def register_directory(dirpath, imongodb):
