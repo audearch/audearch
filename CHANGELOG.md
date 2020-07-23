@@ -16,6 +16,21 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 - Dividing and aligning the input array
 
+## 0.2.0-beta - 2020-07-23
+
+### Added
+
+- STFT function using librosa
+
+### Changed
+
+- Change the music-hash to use sha256
+
+### Removed
+
+- Cli function
+- Registration on browser based on fastapi(This feature has been moved to a different repository)
+
 ## 0.1.0-beta - 2020-06-16
 
 ### Added
