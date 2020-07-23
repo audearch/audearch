@@ -4,10 +4,10 @@ import pytest
 
 class TestRegister(object):
 
-    def test_register_one(self, db_connection):
+    def test_register(self, db_connection):
         imongodb = db_connection
 
-        ar.register_directory('/tests', imongodb)
+        ar.register(1, 'tests/test.wav', imongodb)
 
         cur = imongodb.find(filter={'music_starttime': int(12)})
 
