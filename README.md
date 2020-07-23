@@ -29,18 +29,7 @@ You need to install MongoDB beforehand
 
 ## Usage
 
-Register and search are designed to be used with the CUI.
-
-```
-$ python audearch/register.py
-$ python audearch/search.py
-```
-
-You can also use the GUI using fastapi. The current version does not support search. fastapi can be used with the following commands You can.
-
-```
-$ python web/run.py
-```
+register.py will add songs and search.py will search for them.
 
 ## Author
 

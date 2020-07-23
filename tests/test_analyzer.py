@@ -51,14 +51,14 @@ class TestAnalyzer(object):
         pf, pt = analyzer.find_peak(narray, narray_frame, 5)
         list_landmark = analyzer.peak_to_landmark(pf, pt)
 
-        test1 = (57995, 1)
+        test1 = ("2ccef5329a1a780d069f120acfa7f53fb487e4570d9964c9db1f5190a740f93e", 1)
 
         assert_array_equal(test1, list_landmark[0])
 
     def test_analyzer(self):
         list_landmark = analyzer.analyzer("tests/test.wav")
 
-        test1 = (57995, 1)
+        test1 = ("2ccef5329a1a780d069f120acfa7f53fb487e4570d9964c9db1f5190a740f93e", 1)
 
         assert_array_equal(test1, list_landmark[0])
 
