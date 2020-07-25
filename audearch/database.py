@@ -60,7 +60,7 @@ class MongodbFactory(DatabaseFactory):
         config = configparser.ConfigParser()
         config.read('config.ini')
 
-        self.__client = MongoClient()
+        self.__client = MongoClient(host=config['MongoDB']['host'], port=int(config['MongoDB']['port']))
         self.__db = self.__client[config['MongoDB']['dbname']]
         self.__collection = self.__db.get_collection(config['MongoDB']['collectionname'])
 
