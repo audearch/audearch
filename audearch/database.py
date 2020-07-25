@@ -58,7 +58,7 @@ class MongodbFactory(DatabaseFactory):
 
     def connect_database(self):
         config = configparser.ConfigParser()
-        config.read('config.ini')
+        config.read('audearch-config.ini')
 
         self.__client = MongoClient(host=config['MongoDB']['host'], port=int(config['MongoDB']['port']))
         self.__db = self.__client[config['MongoDB']['dbname']]
