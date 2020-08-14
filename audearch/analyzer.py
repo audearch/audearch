@@ -3,9 +3,10 @@ import numpy as np
 from scipy import ndimage as ndi
 from scipy import signal
 import hashlib
+from typing import List, Tuple
 
 
-def open_wavfile(wave_path):
+def open_wavfile(wave_path: str) -> Tuple[wave.Wave_read, int]:
     """
     get wavefile
 
@@ -26,7 +27,7 @@ def open_wavfile(wave_path):
     return wave_file, rate
 
 
-def transform_nparray(orignal_wave):
+def transform_nparray(orignal_wave: wave.Wave_read) -> Tuple[np.ndarray, int]:
     """transform wave into ndarray
 
     Parameters
@@ -51,7 +52,7 @@ def transform_nparray(orignal_wave):
 # TODO:write more description
 
 
-def find_peak(s, fs, size):
+def find_peak(s: np.ndarray, fs: int, size: int) -> Tuple[np.ndarray, np.ndarray]:
     f1, t1, Zxx1 = signal.stft(s, fs=fs)
     sgram = np.abs(Zxx1)
     sgrammax = ndi.maximum_filter(sgram, size=size, mode="constant")
@@ -60,7 +61,7 @@ def find_peak(s, fs, size):
     return peak_freq, peak_time
 
 
-def peak_to_landmark(peaks_freq, peaks_time, target_freq=10, target_time=10, target_dist=10):
+def peak_to_landmark(peaks_freq: np.ndarray, peaks_time: np.ndarray, target_freq: int = 10, target_time: int = 10, target_dist: int = 10) -> List:
 
     landmarks = []
 
@@ -80,7 +81,7 @@ def peak_to_landmark(peaks_freq, peaks_time, target_freq=10, target_time=10, tar
     return landmarks
 
 
-def analyzer(path):
+def analyzer(path: str) -> List:
     main_wave, main_wave_rate = open_wavfile(path)
     array, frames = transform_nparray(main_wave)
     pf, pt = find_peak(array, frames, 5)
