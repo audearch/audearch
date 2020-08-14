@@ -1,6 +1,7 @@
 import configparser
-from pymongo import MongoClient
 from abc import ABCMeta, abstractmethod
+
+from pymongo import MongoClient
 
 
 class DatabaseFactory(metaclass=ABCMeta):

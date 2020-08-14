@@ -1,7 +1,8 @@
 import librosa
-import analyzer
 import numpy as np
 from scipy import ndimage as ndi
+
+import analyzer
 
 
 def librosa_analyzer(path, size):

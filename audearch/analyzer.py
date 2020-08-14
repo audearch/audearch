@@ -1,9 +1,10 @@
+import hashlib
 import wave
+from typing import List, Tuple
+
 import numpy as np
 from scipy import ndimage as ndi
 from scipy import signal
-import hashlib
-from typing import List, Tuple
 
 
 def open_wavfile(wave_path: str) -> Tuple[wave.Wave_read, int]:
