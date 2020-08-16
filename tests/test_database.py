@@ -3,10 +3,9 @@ import audearch.database as ad
 import audearch.analyzer as aa
 
 
-class TestDatabase:
+class TestDatabase(object):
 
-    @staticmethod
-    def test_database():
+    def test_database_insert_music(self):
         mongodb = ad.MongodbFactory()
         imongodb = mongodb.create()
 
@@ -20,6 +19,22 @@ class TestDatabase:
         result = dict(cur[0])
 
         assert result['music_hash'] == "6ee2e0a7cfbd562f1436ca43a73ba2afea0367244eaa3fa5cc71b826d42ea702"
+
+    def test_database_insert_music_metadata(self):
+        mongodb = ad.MongodbFactory()
+        imongodb = mongodb.create()
+
+        MUSIC_ID = 1
+        TITLE = "TESTMUSIC"
+        DURATION = 30
+
+        imongodb.insert_music_metadata(MUSIC_ID, TITLE, DURATION)
+
+        cur = imongodb.find_music(filter={'music_id': int(1)})
+
+        result = dict(cur[0])
+
+        assert result['music_duration'] == DURATION
 
 
 if __name__ == '__main__':
