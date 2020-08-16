@@ -16,6 +16,17 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 - Dividing and aligning the input array
 
+## 0.2.1-beta - 2020-07-23
+
+### Added
+
+- Add music information to db
+
+### Changed
+
+- You need to explicitly specify the host and port
+- Change insert and find function name
+
 ## 0.2.0-beta - 2020-07-23
 
 ### Added

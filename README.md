@@ -29,7 +29,16 @@ You need to install MongoDB beforehand
 
 ## Usage
 
-register.py will add songs and search.py will search for them.
+First, you need to configure audearch-config.ini
+
+```
+[MongoDB]
+dbname=audearch
+collectionname=hashtable
+host=127.0.0.1
+port=27017
+```
+
 
 ## Author
 
