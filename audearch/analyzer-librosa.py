@@ -1,3 +1,5 @@
+from typing import List
+
 import librosa
 import numpy as np
 from scipy import ndimage as ndi
@@ -5,7 +7,7 @@ from scipy import ndimage as ndi
 import analyzer
 
 
-def librosa_analyzer(path, size):
+def librosa_analyzer(path: str, size: int) -> List:
     y, sr = librosa.load(path)
     Zxx1 = librosa.stft(y)
     sgram = np.abs(Zxx1)
