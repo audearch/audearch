@@ -8,12 +8,12 @@ class DatabaseFactory(metaclass=ABCMeta):
 
     @classmethod
     @abstractmethod
-    def connect_database(self):
+    def connect_database(cls):
         pass
 
     @classmethod
     @abstractmethod
-    def create_database(self, db):
+    def create_database(cls, db):
         pass
 
     def create(self):
@@ -27,12 +27,12 @@ class Database(metaclass=ABCMeta):
 
     @classmethod
     @abstractmethod
-    def insert(self):
+    def insert_music(cls):
         pass
 
     @classmethod
     @abstractmethod
-    def find(self):
+    def find_music(cls):
         pass
 
 
@@ -42,7 +42,7 @@ class Mongodb(Database):
     def __init__(self, db):
         self.__collection = db
 
-    def insert(self, id, hsh, starttime):
+    def insert_music(self, id, hsh, starttime):
         post = {
             'music_id': id,
             'music_hash': hsh,
@@ -51,11 +51,15 @@ class Mongodb(Database):
 
         return self.__collection.insert_one(post)
 
-    def find(self, projection=None, filter=None, sort=None):
+    def find_music(self, projection=None, filter=None, sort=None):
         return self.__collection.find(projection=projection, filter=filter, sort=sort)
 
 
 class MongodbFactory(DatabaseFactory):
+    def __init__(self):
+        self.__client = None
+        self.__db = None
+        self.__collection = None
 
     def connect_database(self):
         config = configparser.ConfigParser()
