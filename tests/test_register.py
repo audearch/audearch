@@ -9,7 +9,7 @@ class TestRegister(object):
 
         ar.register(1, 'tests/test.wav', imongodb)
 
-        cur = imongodb.find(filter={'music_starttime': int(12)})
+        cur = imongodb.find_music(filter={'music_starttime': int(12)})
 
         result = dict(cur[0])
 

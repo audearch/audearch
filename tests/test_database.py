@@ -12,9 +12,9 @@ class TestDatabase(object):
         list_landmark = aa.analyzer("tests/test.wav")
 
         for landmark in list_landmark:
-            imongodb.insert(1, landmark[0], int(landmark[1]))
+            imongodb.insert_music(1, landmark[0], int(landmark[1]))
 
-        cur = imongodb.find(filter={'music_starttime': int(12)})
+        cur = imongodb.find_music(filter={'music_starttime': int(12)})
 
         result = dict(cur[0])
 
