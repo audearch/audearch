@@ -5,7 +5,7 @@ from numpy.testing import assert_array_equal
 import numpy as np
 
 
-class TestAnalyzer(object):
+class TestAnalyzer:
 
     def test_open_wavefile(self):
         filepath = os.getcwd() + '/tests/test.wav'

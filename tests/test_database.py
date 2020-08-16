@@ -3,7 +3,7 @@ import audearch.database as ad
 import audearch.analyzer as aa
 
 
-class TestDatabase(object):
+class TestDatabase:
 
     def test_database(self):
         mongodb = ad.MongodbFactory()

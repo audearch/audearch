@@ -2,7 +2,7 @@ import audearch.register as ar
 import pytest
 
 
-class TestRegister(object):
+class TestRegister:
 
     def test_register(self, db_connection):
         imongodb = db_connection
