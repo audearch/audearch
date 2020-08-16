@@ -54,8 +54,8 @@ def transform_nparray(orignal_wave: wave.Wave_read) -> Tuple[np.ndarray, int]:
 
 
 def find_peak(s: np.ndarray, fs: int, size: int) -> Tuple[np.ndarray, np.ndarray]:
-    f1, t1, Zxx1 = signal.stft(s, fs=fs)
-    sgram = np.abs(Zxx1)
+    Zxx1 = signal.stft(s, fs=fs)
+    sgram = np.abs(Zxx1[2])
     sgrammax = ndi.maximum_filter(sgram, size=size, mode="constant")
     maxima = (sgram == sgrammax) & (sgram > 0.2)
     peak_freq, peak_time = np.where(maxima)
@@ -83,8 +83,8 @@ def peak_to_landmark(peaks_freq: np.ndarray, peaks_time: np.ndarray, target_freq
 
 
 def analyzer(path: str) -> List:
-    main_wave, main_wave_rate = open_wavfile(path)
-    array, frames = transform_nparray(main_wave)
+    main_wave = open_wavfile(path)
+    array, frames = transform_nparray(main_wave[0])
     pf, pt = find_peak(array, frames, 5)
     list_landmark = peak_to_landmark(pf, pt)
 
