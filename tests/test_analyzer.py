@@ -7,7 +7,8 @@ import numpy as np
 
 class TestAnalyzer:
 
-    def test_open_wavefile(self):
+    @staticmethod
+    def test_open_wavefile():
         filepath = os.getcwd() + '/tests/test.wav'
         rate = analyzer.open_wavfile(filepath)
 
@@ -15,7 +16,8 @@ class TestAnalyzer:
 
         assert exwavrate == rate[1]
 
-    def test_transform_nparray(self):
+    @staticmethod
+    def test_transform_nparray():
         wavfile = analyzer.open_wavfile("tests/test.wav")
         narray = analyzer.transform_nparray(wavfile[0])
         a = 1  # 振幅
@@ -34,7 +36,8 @@ class TestAnalyzer:
 
         assert_array_equal(swav, narray[0])
 
-    def test_find_peak(self):
+    @staticmethod
+    def test_find_peak():
         wavfile = analyzer.open_wavfile("tests/test.wav")
         narray, narray_frame = analyzer.transform_nparray(wavfile[0])
         pf, pt = analyzer.find_peak(narray, narray_frame, 5)
@@ -45,7 +48,8 @@ class TestAnalyzer:
         assert_array_equal(test1, pf[0])
         assert_array_equal(test2, pt[0])
 
-    def test_peak_to_landmark(self):
+    @staticmethod
+    def test_peak_to_landmark():
         wavfile, rate = analyzer.open_wavfile("tests/test.wav")
         narray, narray_frame = analyzer.transform_nparray(wavfile)
         pf, pt = analyzer.find_peak(narray, narray_frame, 5)
@@ -55,7 +59,8 @@ class TestAnalyzer:
 
         assert_array_equal(test1, list_landmark[0])
 
-    def test_analyzer(self):
+    @staticmethod
+    def test_analyzer():
         list_landmark = analyzer.analyzer("tests/test.wav")
 
         test1 = ("2ccef5329a1a780d069f120acfa7f53fb487e4570d9964c9db1f5190a740f93e", 1)

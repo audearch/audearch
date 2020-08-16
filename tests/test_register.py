@@ -4,7 +4,8 @@ import pytest
 
 class TestRegister:
 
-    def test_register(self, db_connection):
+    @staticmethod
+    def test_register(db_connection):
         imongodb = db_connection
 
         ar.register(1, 'tests/test.wav', imongodb)

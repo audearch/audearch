@@ -5,7 +5,8 @@ import audearch.analyzer as aa
 
 class TestDatabase:
 
-    def test_database(self):
+    @staticmethod
+    def test_database():
         mongodb = ad.MongodbFactory()
         imongodb = mongodb.create()
 
