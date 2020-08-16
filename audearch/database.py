@@ -42,9 +42,9 @@ class Mongodb(Database):
     def __init__(self, db):
         self.__collection = db
 
-    def insert_music(self, id, hsh, starttime):
+    def insert_music(self, music_id, hsh, starttime):
         post = {
-            'music_id': id,
+            'music_id': music_id,
             'music_hash': hsh,
             'music_starttime': starttime
         }
