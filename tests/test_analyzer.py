@@ -5,19 +5,21 @@ from numpy.testing import assert_array_equal
 import numpy as np
 
 
-class TestAnalyzer(object):
+class TestAnalyzer:
 
-    def test_open_wavefile(self):
+    @staticmethod
+    def test_open_wavefile():
         filepath = os.getcwd() + '/tests/test.wav'
-        file, rate = analyzer.open_wavfile(filepath)
+        rate = analyzer.open_wavfile(filepath)
 
         exwavrate = 8000
 
-        assert exwavrate == rate
+        assert exwavrate == rate[1]
 
-    def test_transform_nparray(self):
-        wavfile, rate = analyzer.open_wavfile("tests/test.wav")
-        narray, narray_frame = analyzer.transform_nparray(wavfile)
+    @staticmethod
+    def test_transform_nparray():
+        wavfile = analyzer.open_wavfile("tests/test.wav")
+        narray = analyzer.transform_nparray(wavfile[0])
         a = 1  # 振幅
         fs = 8000  # サンプリング周波数
         f0 = 440  # 周波数
@@ -32,11 +34,12 @@ class TestAnalyzer(object):
 
         swav = [int(x * 32767.0) for x in swav]
 
-        assert_array_equal(swav, narray)
+        assert_array_equal(swav, narray[0])
 
-    def test_find_peak(self):
-        wavfile, rate = analyzer.open_wavfile("tests/test.wav")
-        narray, narray_frame = analyzer.transform_nparray(wavfile)
+    @staticmethod
+    def test_find_peak():
+        wavfile = analyzer.open_wavfile("tests/test.wav")
+        narray, narray_frame = analyzer.transform_nparray(wavfile[0])
         pf, pt = analyzer.find_peak(narray, narray_frame, 5)
 
         test1 = 14
@@ -45,20 +48,22 @@ class TestAnalyzer(object):
         assert_array_equal(test1, pf[0])
         assert_array_equal(test2, pt[0])
 
-    def test_peak_to_landmark(self):
-        wavfile, rate = analyzer.open_wavfile("tests/test.wav")
-        narray, narray_frame = analyzer.transform_nparray(wavfile)
+    @staticmethod
+    def test_peak_to_landmark():
+        wavfile = analyzer.open_wavfile("tests/test.wav")
+        narray, narray_frame = analyzer.transform_nparray(wavfile[0])
         pf, pt = analyzer.find_peak(narray, narray_frame, 5)
         list_landmark = analyzer.peak_to_landmark(pf, pt)
 
-        test1 = (57995, 1)
+        test1 = ("2ccef5329a1a780d069f120acfa7f53fb487e4570d9964c9db1f5190a740f93e", 1)
 
         assert_array_equal(test1, list_landmark[0])
 
-    def test_analyzer(self):
+    @staticmethod
+    def test_analyzer():
         list_landmark = analyzer.analyzer("tests/test.wav")
 
-        test1 = (57995, 1)
+        test1 = ("2ccef5329a1a780d069f120acfa7f53fb487e4570d9964c9db1f5190a740f93e", 1)
 
         assert_array_equal(test1, list_landmark[0])
 

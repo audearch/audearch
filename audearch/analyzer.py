@@ -1,10 +1,13 @@
+import hashlib
 import wave
+from typing import List, Tuple
+
 import numpy as np
 from scipy import ndimage as ndi
 from scipy import signal
 
 
-def open_wavfile(wave_path):
+def open_wavfile(wave_path: str) -> Tuple[wave.Wave_read, int]:
     """
     get wavefile
 
@@ -25,7 +28,7 @@ def open_wavfile(wave_path):
     return wave_file, rate
 
 
-def transform_nparray(orignal_wave):
+def transform_nparray(orignal_wave: wave.Wave_read) -> Tuple[np.ndarray, int]:
     """transform wave into ndarray
 
     Parameters
@@ -50,25 +53,16 @@ def transform_nparray(orignal_wave):
 # TODO:write more description
 
 
-def find_peak(s, fs, size):
-    f1, t1, Zxx1 = signal.stft(s, fs=fs)
-    sgram = np.abs(Zxx1)
+def find_peak(s: np.ndarray, fs: int, size: int) -> Tuple[np.ndarray, np.ndarray]:
+    Zxx1 = signal.stft(s, fs=fs)
+    sgram = np.abs(Zxx1[2])
     sgrammax = ndi.maximum_filter(sgram, size=size, mode="constant")
     maxima = (sgram == sgrammax) & (sgram > 0.2)
     peak_freq, peak_time = np.where(maxima)
     return peak_freq, peak_time
 
 
-def peak_to_landmark(peaks_freq, peaks_time, target_freq=10, target_time=10, target_dist=10):
-    F1_BITS = 8
-    DF_BITS = 6
-    DT_BITS = 6
-
-    B1_MASK = (1 << F1_BITS) - 1
-    B1_SHIFT = DF_BITS + DT_BITS
-    DF_MASK = (1 << DF_BITS) - 1
-    DF_SHIFT = DT_BITS
-    DT_MASK = (1 << DT_BITS) - 1
+def peak_to_landmark(peaks_freq: np.ndarray, peaks_time: np.ndarray, target_freq: int = 10, target_time: int = 10, target_dist: int = 10) -> List:
 
     landmarks = []
 
@@ -81,16 +75,16 @@ def peak_to_landmark(peaks_freq, peaks_time, target_freq=10, target_time=10, tar
         for ptime_target, pfreq_target in list(zone.items()):
             disttime = int(ptime_target) - anc_time
 
-            hsh = (((anc_freq & B1_MASK) << B1_SHIFT) | (
-                ((pfreq_target+target_freq-anc_freq) & DF_MASK) << DF_SHIFT) | (disttime & DT_MASK))
+            hsh = hashlib.sha256((anc_time << 6) | ((pfreq_target+target_freq-anc_freq) << 8) | (disttime)).hexdigest()
+
             landmarks.append((hsh, anc_time))
 
     return landmarks
 
 
-def analyzer(path):
-    main_wave, main_wave_rate = open_wavfile(path)
-    array, frames = transform_nparray(main_wave)
+def analyzer(path: str) -> List:
+    main_wave = open_wavfile(path)
+    array, frames = transform_nparray(main_wave[0])
     pf, pt = find_peak(array, frames, 5)
     list_landmark = peak_to_landmark(pf, pt)
 

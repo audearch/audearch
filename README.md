@@ -29,18 +29,16 @@ You need to install MongoDB beforehand
 
 ## Usage
 
-Register and search are designed to be used with the CUI.
+First, you need to configure audearch-config.ini
 
 ```
-$ python audearch/register.py
-$ python audearch/search.py
+[MongoDB]
+dbname=audearch
+collectionname=hashtable
+host=127.0.0.1
+port=27017
 ```
 
-You can also use the GUI using fastapi. The current version does not support search. fastapi can be used with the following commands You can.
-
-```
-$ python web/run.py
-```
 
 ## Author
 

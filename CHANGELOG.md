@@ -16,6 +16,32 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 - Dividing and aligning the input array
 
+## 0.2.1-beta - 2020-07-23
+
+### Added
+
+- Add music information to db
+
+### Changed
+
+- You need to explicitly specify the host and port
+- Change insert and find function name
+
+## 0.2.0-beta - 2020-07-23
+
+### Added
+
+- STFT function using librosa
+
+### Changed
+
+- Change the music-hash to use sha256
+
+### Removed
+
+- Cli function
+- Registration on browser based on fastapi(This feature has been moved to a different repository)
+
 ## 0.1.0-beta - 2020-06-16
 
 ### Added
