@@ -8,8 +8,8 @@ import analyzer
 
 
 def librosa_analyzer(path: str, size: int) -> List:
-    y, sr = librosa.load(path)
-    Zxx1 = librosa.stft(y)
+    y = librosa.load(path)
+    Zxx1 = librosa.stft(y[0])
     sgram = np.abs(Zxx1)
     sgrammax = ndi.maximum_filter(sgram, size=size, mode="constant")
     maxima = (sgram == sgrammax) & (sgram > 0.2)
