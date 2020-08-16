@@ -50,8 +50,8 @@ class TestAnalyzer:
 
     @staticmethod
     def test_peak_to_landmark():
-        wavfile, rate = analyzer.open_wavfile("tests/test.wav")
-        narray, narray_frame = analyzer.transform_nparray(wavfile)
+        wavfile = analyzer.open_wavfile("tests/test.wav")
+        narray, narray_frame = analyzer.transform_nparray(wavfile[0])
         pf, pt = analyzer.find_peak(narray, narray_frame, 5)
         list_landmark = analyzer.peak_to_landmark(pf, pt)
 
