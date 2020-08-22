@@ -1,10 +1,12 @@
 import hashlib
 import wave
-from typing import List, Tuple
+from typing import Dict, List, Tuple
 
+import librosa
 import numpy as np
 from scipy import ndimage as ndi
 from scipy import signal
+from tqdm import tqdm
 
 
 def open_wavfile(wave_path: str) -> Tuple[wave.Wave_read, int]:
@@ -66,10 +68,12 @@ def peak_to_landmark(peaks_freq: np.ndarray, peaks_time: np.ndarray, target_freq
 
     landmarks = []
 
+    bar = tqdm(total=len(peaks_freq))
+
     for anc_freq, anc_time in zip(peaks_freq, peaks_time):
-        firsttime = anc_time + target_time
-        endtime = firsttime + target_dist
-        target = dict(zip(peaks_time, peaks_freq))
+        firsttime: int = anc_time + target_time
+        endtime: int = firsttime + target_dist
+        target: Dict[int, int] = dict(zip(peaks_time, peaks_freq))
         zone = {k: v for k, v in target.items() if int(k) >
                 firsttime and int(k) < endtime}
         for ptime_target, pfreq_target in list(zone.items()):
@@ -78,6 +82,8 @@ def peak_to_landmark(peaks_freq: np.ndarray, peaks_time: np.ndarray, target_freq
             hsh = hashlib.sha256((anc_time << 6) | ((pfreq_target+target_freq-anc_freq) << 8) | (disttime)).hexdigest()
 
             landmarks.append((hsh, anc_time))
+
+        bar.update(1)
 
     return landmarks
 
@@ -89,3 +95,16 @@ def analyzer(path: str) -> List:
     list_landmark = peak_to_landmark(pf, pt)
 
     return list_landmark
+
+
+def librosa_analyzer(path: str, size: int) -> List:
+    y = librosa.load(path)
+    Zxx1 = librosa.stft(y[0])
+    sgram = np.abs(Zxx1)
+    sgrammax = ndi.maximum_filter(sgram, size=size, mode="constant")
+    maxima = (sgram == sgrammax) & (sgram > 0.2)
+    peak_freq, peak_time = np.where(maxima)
+
+    ans = peak_to_landmark(peak_freq, peak_time)
+
+    return ans

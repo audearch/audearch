@@ -40,7 +40,7 @@ class Mongodb(Database):
         self.__db = database
         self.__config = conf
 
-    def insert_music(self, music_id, hsh, starttime):
+    def insert_music(self, music_id: int, hsh: str, starttime: int) -> None:
         self.__collection = self.__db.get_collection(self.__config['MongoDB']['music_collectionname'])
 
         post = {
