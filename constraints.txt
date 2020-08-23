@@ -1,4 +1,6 @@
 numpy==1.19.1
 scipy==1.5.2
+librosa==0.7.2
+tqdm==4.46.1
 pymongo==3.11.0
 configparser==5.0.0
