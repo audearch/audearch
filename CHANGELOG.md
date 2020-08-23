@@ -16,6 +16,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 - Dividing and aligning the input array
 
+## 0.2.3-beta - 2020-08-22
+
+### Changed
+
+- Fixing dependency mistakes
+
+
 ## 0.2.2-beta - 2020-08-22
 
 ### Changed
