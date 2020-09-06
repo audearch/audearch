@@ -61,7 +61,7 @@ class TestAnalyzer:
 
     @staticmethod
     def test_analyzer():
-        list_landmark = analyzer.analyzer("tests/test.wav")
+        list_landmark = analyzer.analyzer("tests/test.wav", 5)
 
         test1 = ("2ccef5329a1a780d069f120acfa7f53fb487e4570d9964c9db1f5190a740f93e", 1)
 

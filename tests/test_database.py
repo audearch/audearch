@@ -10,7 +10,7 @@ class TestDatabase:
         mongodb = ad.MongodbFactory()
         imongodb = mongodb.create()
 
-        list_landmark = aa.analyzer("tests/test.wav")
+        list_landmark = aa.analyzer("tests/test.wav", 5)
 
         for landmark in list_landmark:
             imongodb.insert_music(1, landmark[0], int(landmark[1]))
