@@ -1,6 +1,6 @@
-import configparser
 from abc import ABCMeta, abstractmethod
 
+import toml
 from pymongo import MongoClient
 
 
@@ -41,7 +41,7 @@ class Mongodb(Database):
         self.__config = conf
 
     def insert_music(self, music_id: int, hsh: str, starttime: int) -> None:
-        self.__collection = self.__db.get_collection(self.__config['MongoDB']['music_collectionname'])
+        self.__collection = self.__db.get_collection(self.__config['database']['mongodb']['music_collectionname'])
 
         post = {
             'music_id': music_id,
@@ -52,7 +52,7 @@ class Mongodb(Database):
         self.__collection.insert_one(post)
 
     def insert_music_metadata(self, music_id, title, duration):
-        self.__collection = self.__db.get_collection(self.__config['MongoDB']['music_metadata_collectionname'])
+        self.__collection = self.__db.get_collection(self.__config['database']['mongodb']['music_metadata_collectionname'])
 
         music_metadata = {
             'music_id': music_id,
@@ -72,11 +72,10 @@ class MongodbFactory(DatabaseFactory):
         self.__db = None
 
     def connect_database(self):
-        self.__config = configparser.ConfigParser()
-        self.__config.read('audearch-config.ini')
+        self.__config = toml.load(open('audearch-config.toml'))
 
-        self.__client = MongoClient(host=self.__config['MongoDB']['host'], port=int(self.__config['MongoDB']['port']))
-        self.__db = self.__client[self.__config['MongoDB']['dbname']]
+        self.__client = MongoClient(host=self.__config['database']['mongodb']['host'], port=int(self.__config['database']['mongodb']['port']))
+        self.__db = self.__client[self.__config['database']['mongodb']['dbname']]
 
         self.__database = Mongodb(self.__db, self.__config)
 
