@@ -88,10 +88,10 @@ def peak_to_landmark(peaks_freq: np.ndarray, peaks_time: np.ndarray, target_freq
     return landmarks
 
 
-def analyzer(path: str) -> List:
+def analyzer(path: str, size: int) -> List:
     main_wave = open_wavfile(path)
     array, frames = transform_nparray(main_wave[0])
-    pf, pt = find_peak(array, frames, 5)
+    pf, pt = find_peak(array, frames, size)
     list_landmark = peak_to_landmark(pf, pt)
 
     return list_landmark

@@ -8,7 +8,7 @@ class TestRegister:
     def test_register(db_connection):
         imongodb = db_connection
 
-        ar.register(1, 'tests/test.wav', imongodb)
+        ar.register(1, 'tests/test.wav', 5, imongodb)
 
         cur = imongodb.find_music(filter={'music_starttime': int(12)})
 
