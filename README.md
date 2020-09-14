@@ -31,14 +31,16 @@ You need to install MongoDB beforehand
 
 ## Usage
 
-First, you need to configure audearch-config.ini
+If you want to use my database system, you need to configure audearch-config.toml
 
 ```
-[MongoDB]
-dbname=audearch
-collectionname=hashtable
-host=127.0.0.1
-port=27017
+[database]
+    [database.mongodb]
+    dbname = "audearch"
+    music_collectionname = "hashtable"
+    music_metadata_collectionname = "musicinfotable"
+    host = "127.0.0.1"
+    port = "27017"
 ```
 
 
