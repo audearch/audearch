@@ -2,7 +2,7 @@ import audearch.analyzer as aa
 import statistics
 
 
-def search(path:str, size:int, imongodb):
+def search(path: str, size: int, imongodb):
     ids = []
 
     list_landamrk = aa.analyzer(path, size)
