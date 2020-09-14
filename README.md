@@ -1,5 +1,7 @@
 # audearch
 
+![header](https://raw.githubusercontent.com/audearch/branding/main/images/header.png)
+
 audearch is a simple audio fingerprinting system
 
 [![GitHub version](https://badge.fury.io/gh/peijun%2Fauderch.svg)](https://badge.fury.io/gh/peijun%2Fauderch)
