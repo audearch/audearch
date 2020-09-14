@@ -5,7 +5,7 @@
 audearch is a simple audio fingerprinting system
 
 [![GitHub version](https://badge.fury.io/gh/peijun%2Fauderch.svg)](https://badge.fury.io/gh/peijun%2Fauderch)
-![Python application](https://github.com/audearch/audearch/workflows/Python%20application/badge.svg?branch=master)
+![Python application](https://github.com/audearch/audearch/workflows/Python%20application/badge.svg?branch=develop)
 [![codecov](https://codecov.io/gh/audearch/audearch/branch/master/graph/badge.svg)](https://codecov.io/gh/audearch/audearch)
 [![Maintainability](https://api.codeclimate.com/v1/badges/3a68a57d0d25eedcb465/maintainability)](https://codeclimate.com/github/audearch/audearch/maintainability)
 
