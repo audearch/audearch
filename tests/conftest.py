@@ -7,4 +7,6 @@ def db_connection():
     mongodb = ad.MongodbFactory()
     imongodb = mongodb.create()
 
-    return imongodb
+    yield imongodb
+
+    imongodb.delete_table()
