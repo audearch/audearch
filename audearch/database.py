@@ -71,8 +71,8 @@ class Mongodb(Database):
         return self.__collection.find(projection=projection, filter=filter, sort=sort)
 
     def delete_table(self):
-        self.__db.collection.drop(self.__config['database']['mongodb']['music_collectionname'])
-        self.__db.collection.drop(self.__config['database']['mongodb']['music_metadata_collectionname'])
+        self.__db.drop_collection(str(self.__config['database']['mongodb']['music_collectionname']))
+        self.__db.drop_collection(str(self.__config['database']['mongodb']['music_metadata_collectionname']))
 
 
 class MongodbFactory(DatabaseFactory):
