@@ -1,5 +1,7 @@
 # audearch
 
+![header](https://raw.githubusercontent.com/audearch/branding/main/images/header.png)
+
 audearch is a simple audio fingerprinting system
 
 [![GitHub version](https://badge.fury.io/gh/peijun%2Fauderch.svg)](https://badge.fury.io/gh/peijun%2Fauderch)
@@ -29,14 +31,16 @@ You need to install MongoDB beforehand
 
 ## Usage
 
-First, you need to configure audearch-config.ini
+If you want to use my database, regist, search system, you need to configure audearch-config.toml
 
 ```
-[MongoDB]
-dbname=audearch
-collectionname=hashtable
-host=127.0.0.1
-port=27017
+[database]
+    [database.mongodb]
+    dbname = "audearch"
+    music_collectionname = "hashtable"
+    music_metadata_collectionname = "musicinfotable"
+    host = "127.0.0.1"
+    port = "27017"
 ```
 
 

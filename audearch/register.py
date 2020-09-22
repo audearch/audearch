@@ -1,7 +1,7 @@
 import audearch.analyzer as aa
 
 
-def register(id: int, path: str, size: int,imongodb):
+def register(id: int, path: str, size: int, imongodb):
 
     list_landmark = aa.analyzer(path, size)
 

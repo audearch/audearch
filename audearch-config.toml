@@ -1,0 +1,7 @@
+[database]
+    [database.mongodb]
+    dbname = "audearch"
+    music_collectionname = "hashtable"
+    music_metadata_collectionname = "musicinfotable"
+    host = "127.0.0.1"
+    port = "27017"
