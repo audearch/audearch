@@ -10,9 +10,12 @@ def search(path: str, size: int, imongodb):
     for i, landmark in enumerate(list_landamrk):
         id1, id2, id3 = [], [], []
 
-        cur1 = imongodb.find_music(filter={'music_hash': int(landmark[0])})
-        cur2 = imongodb.find_music(filter={'music_hash': int(list_landamrk[i+1][0])})
-        cur3 = imongodb.find_music(filter={'music_hash': int(list_landamrk[i+2][0])})
+        if i == len(list_landamrk) - 3:
+            break
+        else:
+            cur1 = imongodb.find_music(filter={'music_hash': landmark[0]})
+            cur2 = imongodb.find_music(filter={'music_hash': list_landamrk[i+1][0]})
+            cur3 = imongodb.find_music(filter={'music_hash': list_landamrk[i+2][0]})
 
         for doc1, doc2, doc3 in zip(cur1, cur2, cur3):
 
