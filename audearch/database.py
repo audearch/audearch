@@ -34,6 +34,11 @@ class Database(metaclass=ABCMeta):
     def find_music(cls):
         pass
 
+    @classmethod
+    @abstractmethod
+    def delete_table(cls):
+        pass
+
 
 class Mongodb(Database):
     def __init__(self, database, conf):
@@ -64,6 +69,10 @@ class Mongodb(Database):
 
     def find_music(self, projection=None, filter=None, sort=None):
         return self.__collection.find(projection=projection, filter=filter, sort=sort)
+
+    def delete_table(self):
+        self.__db.drop_collection(str(self.__config['database']['mongodb']['music_collectionname']))
+        self.__db.drop_collection(str(self.__config['database']['mongodb']['music_metadata_collectionname']))
 
 
 class MongodbFactory(DatabaseFactory):
