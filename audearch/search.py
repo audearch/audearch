@@ -2,10 +2,8 @@ import audearch.analyzer as aa
 import statistics
 
 
-def search(path: str, size: int, imongodb):
+def search_music(list_landamrk, imongodb):
     ids = []
-
-    list_landamrk = aa.analyzer(path, size)
 
     for i, landmark in enumerate(list_landamrk):
         id1, id2, id3 = [], [], []
@@ -27,5 +25,23 @@ def search(path: str, size: int, imongodb):
         ids.extend(id_common_123)
 
     ans = statistics.mode(ids)
+
+    return ans
+
+
+def search(path: str, size: int, imongodb):
+
+    list_landamrk = aa.analyzer(path, size)
+
+    ans = search_music(list_landamrk, imongodb)
+
+    return ans
+
+
+def librosa_search(path: str, size: int, imongodb):
+
+    list_landamrk = aa.librosa_analyzer(path, size)
+
+    ans = search_music(list_landamrk, imongodb)
 
     return ans
