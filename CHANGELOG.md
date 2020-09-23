@@ -12,6 +12,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 - Dividing and aligning the input array
 
+## 0.3.1-beta - 2020-09-23
+
+### Added
+
+- Supports searches in librosa.
+
 ## 0.3.0-beta - 2020-09-22
 
 ### Added
