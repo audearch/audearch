@@ -68,6 +68,13 @@ class Mongodb(Database):
         self.__collection.insert_one(music_metadata)
 
     def find_music(self, projection=None, filter=None, sort=None):
+        self.__collection = self.__db.get_collection(self.__config['database']['mongodb']['music_collectionname'])
+
+        return self.__collection.find(projection=projection, filter=filter, sort=sort)
+
+    def find_music_metadata(self, projection=None, filter=None, sort=None):
+        self.__collection = self.__db.get_collection(self.__config['database']['mongodb']['music_metadata_collectionname'])
+
         return self.__collection.find(projection=projection, filter=filter, sort=sort)
 
     def delete_table(self):
