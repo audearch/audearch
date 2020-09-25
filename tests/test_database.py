@@ -32,11 +32,11 @@ class TestDatabase:
 
         imongodb.insert_music_metadata(MUSIC_ID, TITLE, DURATION)
 
-        cur = imongodb.find_music(filter={'music_id': int(1)})
+        cur = imongodb.find_music_metadata(filter={'music_id': int(1)})
 
         result = dict(cur[0])
 
-        assert result['music_duration'] == DURATION
+        assert result['music_duration'] == 30
 
 
 if __name__ == '__main__':
