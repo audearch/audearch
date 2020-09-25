@@ -12,6 +12,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 - Dividing and aligning the input array
 
+## 0.3.2-beta - 2020-09-25
+
+### Added
+
+- Supports searches music metadata
+
 ## 0.3.1-beta - 2020-09-23
 
 ### Added
