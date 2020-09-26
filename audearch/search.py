@@ -15,8 +15,8 @@ def search_music(list_landamrk, imongodb):
             break
         else:
             cur1 = imongodb.find_music(filter={'music_hash': landmark[0]})
-            cur2 = imongodb.find_music(filter={'music_hash': list_landamrk[i+1][0]})
-            cur3 = imongodb.find_music(filter={'music_hash': list_landamrk[i+2][0]})
+            cur2 = imongodb.find_music(filter={'music_hash': list_landamrk[i + 1][0]})
+            cur3 = imongodb.find_music(filter={'music_hash': list_landamrk[i + 2][0]})
 
         for doc1, doc2, doc3 in zip(cur1, cur2, cur3):
 
