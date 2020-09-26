@@ -5,8 +5,14 @@ from tqdm import tqdm
 import audearch.analyzer as aa
 
 
-def search_music(list_landmark, imongodb):
+def search_music(list_landmark, imongodb, progress=None):
     ids = []
+
+    if progress is None:
+        pass
+    else:
+        progress[0] = len(list_landmark)
+        progress[1] = 3
 
     for i, landmark in enumerate(tqdm(list_landmark)):
         id1, id2, id3 = [], [], []
@@ -23,6 +29,11 @@ def search_music(list_landmark, imongodb):
             id1.append(doc1['music_id'])
             id2.append(doc2['music_id'])
             id3.append(doc3['music_id'])
+
+        if progress is None:
+            pass
+        else:
+            progress[1] = int(progress[1]) + 1
 
         id_common_123 = list(set(id1) & set(id2) & set(id3))
         ids.extend(id_common_123)
