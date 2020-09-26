@@ -5,18 +5,18 @@ from tqdm import tqdm
 import audearch.analyzer as aa
 
 
-def search_music(list_landamrk, imongodb):
+def search_music(list_landmark, imongodb):
     ids = []
 
-    for i, landmark in enumerate(tqdm(list_landamrk)):
+    for i, landmark in enumerate(tqdm(list_landmark)):
         id1, id2, id3 = [], [], []
 
-        if i == len(list_landamrk) - 3:
+        if i == len(list_landmark) - 3:
             break
         else:
             cur1 = imongodb.find_music(filter={'music_hash': landmark[0]})
-            cur2 = imongodb.find_music(filter={'music_hash': list_landamrk[i + 1][0]})
-            cur3 = imongodb.find_music(filter={'music_hash': list_landamrk[i + 2][0]})
+            cur2 = imongodb.find_music(filter={'music_hash': list_landmark[i + 1][0]})
+            cur3 = imongodb.find_music(filter={'music_hash': list_landmark[i + 2][0]})
 
         for doc1, doc2, doc3 in zip(cur1, cur2, cur3):
 
@@ -34,17 +34,17 @@ def search_music(list_landamrk, imongodb):
 
 def search(path: str, size: int, imongodb):
 
-    list_landamrk = aa.analyzer(path, size)
+    list_landmark = aa.analyzer(path, size)
 
-    ans = search_music(list_landamrk, imongodb)
+    ans = search_music(list_landmark, imongodb)
 
     return ans
 
 
 def librosa_search(path: str, size: int, imongodb):
 
-    list_landamrk = aa.librosa_analyzer(path, size)
+    list_landmark = aa.librosa_analyzer(path, size)
 
-    ans = search_music(list_landamrk, imongodb)
+    ans = search_music(list_landmark, imongodb)
 
     return ans
