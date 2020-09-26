@@ -1,11 +1,14 @@
-import audearch.analyzer as aa
 import statistics
+
+from tqdm import tqdm
+
+import audearch.analyzer as aa
 
 
 def search_music(list_landamrk, imongodb):
     ids = []
 
-    for i, landmark in enumerate(list_landamrk):
+    for i, landmark in enumerate(tqdm(list_landamrk)):
         id1, id2, id3 = [], [], []
 
         if i == len(list_landamrk) - 3:
